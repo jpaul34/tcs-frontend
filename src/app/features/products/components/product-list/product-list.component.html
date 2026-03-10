@@ -1,6 +1,6 @@
 <div class="card-layout">
   <div class="toolbar">
-    <input type="text" placeholder="Search..." class="search-input" />
+    <input type="text" placeholder="Search..." class="search-input" [formControl]="searchControl" />
     <button class="btn-primary" routerLink="/products/add">Agregar</button>
   </div>
 
@@ -34,7 +34,7 @@
         </thead>
 
         <tbody>
-          @if (products$ | async; as products) {
+          @if (filteredProducts$ | async; as products) {
             @for (product of products; track product.id) {
               <tr>
                 <td>
@@ -79,10 +79,10 @@
 
     <div class="pagination-footer">
       <span class="results-text">{{ resultsCount }} Resultados</span>
-      <select class="page-size-select" [(value)]="pageSize">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
+      <select class="page-size-select" [formControl]="pageSizeControl">
+        <option [ngValue]="5">5</option>
+        <option [ngValue]="10">10</option>
+        <option [ngValue]="20">20</option>
       </select>
     </div>
   </div>

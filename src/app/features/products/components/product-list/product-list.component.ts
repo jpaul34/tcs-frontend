@@ -3,31 +3,34 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.interface';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { SkeletonLoaderComponent } from '../../../../shared/components/skeleton-loader/skeleton-loader.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, SkeletonLoaderComponent],
+  imports: [CommonModule, RouterLink, SkeletonLoaderComponent, ReactiveFormsModule],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
   private productService = inject(ProductService);
 
-  products$!: Observable<Product[]>;
+  filteredProducts$!: Observable<Product[]>;
+
+  searchControl = new FormControl('');
+  pageSizeControl = new FormControl(5);
 
   resultsCount = 0;
-  pageSize = 5;
 
   ngOnInit(): void {
     this.loadProducts();
   }
 
   loadProducts(): void {
-    // this.products$ = this.productService.getProducts();
-    this.products$ = new Observable<Product[]>((subscriber) => {
+    // const productsData = this.productService.getProducts();
+    const productsData = new Observable<Product[]>((subscriber) => {
       setTimeout(() => {
         subscriber.next([
           {
@@ -36,7 +39,7 @@ export class ProductListComponent implements OnInit {
             description: 'Description 1',
             date_release: '2022-01-01',
             date_revision: '2022-01-01',
-            logo: 'https://via.placeholder.com/40',
+            logo: 'https://resources.ripplematch.com/hubfs/Tata%20Consultancy%20Services-1.png',
           },
           {
             id: '2',
@@ -44,7 +47,7 @@ export class ProductListComponent implements OnInit {
             description: 'Description 2',
             date_release: '2022-01-01',
             date_revision: '2022-01-01',
-            logo: 'https://via.placeholder.com/40',
+            logo: 'https://resources.ripplematch.com/hubfs/Tata%20Consultancy%20Services-1.png',
           },
           {
             id: '3',
@@ -52,11 +55,89 @@ export class ProductListComponent implements OnInit {
             description: 'Description 3',
             date_release: '2022-01-01',
             date_revision: '2022-01-01',
-            logo: 'https://via.placeholder.com/40',
+            logo: 'https://resources.ripplematch.com/hubfs/Tata%20Consultancy%20Services-1.png',
+          },
+          {
+            id: '4',
+            name: 'Product 4',
+            description: 'Description 4',
+            date_release: '2022-01-01',
+            date_revision: '2022-01-01',
+            logo: 'https://resources.ripplematch.com/hubfs/Tata%20Consultancy%20Services-1.png',
+          },
+          {
+            id: '5',
+            name: 'Product 5',
+            description: 'Description 5',
+            date_release: '2022-01-01',
+            date_revision: '2022-01-01',
+            logo: 'https://resources.ripplematch.com/hubfs/Tata%20Consultancy%20Services-1.png',
+          },
+          {
+            id: '6',
+            name: 'Product 6',
+            description: 'Description 6',
+            date_release: '2022-01-01',
+            date_revision: '2022-01-01',
+            logo: 'https://resources.ripplematch.com/hubfs/Tata%20Consultancy%20Services-1.png',
+          },
+          {
+            id: '7',
+            name: 'Product 7',
+            description: 'Description 7',
+            date_release: '2022-01-01',
+            date_revision: '2022-01-01',
+            logo: 'https://resources.ripplematch.com/hubfs/Tata%20Consultancy%20Services-1.png',
+          },
+          {
+            id: '8',
+            name: 'Product 8',
+            description: 'Description 8',
+            date_release: '2022-01-01',
+            date_revision: '2022-01-01',
+            logo: 'https://resources.ripplematch.com/hubfs/Tata%20Consultancy%20Services-1.png',
+          },
+          {
+            id: '9',
+            name: 'Product 9',
+            description: 'Description 9',
+            date_release: '2022-01-01',
+            date_revision: '2022-01-01',
+            logo: 'https://resources.ripplematch.com/hubfs/Tata%20Consultancy%20Services-1.png',
+          },
+          {
+            id: '10',
+            name: 'Product 10',
+            description: 'Description 10',
+            date_release: '2022-01-01',
+            date_revision: '2022-01-01',
+            logo: 'https://resources.ripplematch.com/hubfs/Tata%20Consultancy%20Services-1.png',
           },
         ]);
         subscriber.complete();
       }, 1000);
     });
+
+    const search$ = this.searchControl.valueChanges.pipe(startWith(this.searchControl.value || ''));
+    const pageSize$ = this.pageSizeControl.valueChanges.pipe(
+      startWith(this.pageSizeControl.value || 5),
+    );
+
+    this.filteredProducts$ = combineLatest([productsData, search$, pageSize$]).pipe(
+      map(([products, searchTerm, pageSize]) => {
+        let filtered = products;
+
+        if (searchTerm) {
+          const term = searchTerm.toLowerCase();
+          filtered = products.filter(
+            (p) =>
+              p.name.toLowerCase().includes(term) || p.description.toLowerCase().includes(term),
+          );
+        }
+
+        this.resultsCount = filtered.length;
+        return filtered.slice(0, Number(pageSize));
+      }),
+    );
   }
 }
