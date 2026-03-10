@@ -16,7 +16,7 @@ import { Component, Input } from '@angular/core';
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
       }
 
       .skeleton-row {
