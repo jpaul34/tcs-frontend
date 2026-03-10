@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #fbd34d;
+  --primary-hover: #fcd34d;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --bg-main: #f9fafb;
+  --bg-card: #ffffff;
+  --border-color: #e5e7eb;
+  --error-color: #ef4444;
+  --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: var(--text-main);
+
+  &:hover {
+    background-color: var(--primary-hover);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}

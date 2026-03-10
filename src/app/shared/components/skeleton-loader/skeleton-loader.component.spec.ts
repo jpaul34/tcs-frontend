@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SkeletonLoader } from './skeleton-loader';
+import { SkeletonLoaderComponent } from './skeleton-loader.component';
 
 describe('SkeletonLoader', () => {
-  let component: SkeletonLoader;
-  let fixture: ComponentFixture<SkeletonLoader>;
+  let component: SkeletonLoaderComponent;
+  let fixture: ComponentFixture<SkeletonLoaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SkeletonLoader],
+      imports: [SkeletonLoaderComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SkeletonLoader);
+    fixture = TestBed.createComponent(SkeletonLoaderComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
