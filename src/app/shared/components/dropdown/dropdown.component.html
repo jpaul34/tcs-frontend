@@ -1,0 +1,5 @@
+@if (isOpen) {
+  <div class="dropdown-menu" [ngStyle]="{ top: position.top + 'px', left: position.left + 'px' }">
+    <ng-content></ng-content>
+  </div>
+}

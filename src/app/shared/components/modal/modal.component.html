@@ -1,0 +1,22 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>{{ message }}</h3>
+
+      @if (errorMessage) {
+        <div class="error-banner">{{ errorMessage }}</div>
+      }
+    </div>
+    <hr class="divider" />
+    <div class="modal-actions">
+      <button class="btn-secondary" (click)="onCancel()">{{ cancelText }}</button>
+      <button class="btn-primary" (click)="onConfirm()" [disabled]="isProcessing">
+        @if (isProcessing) {
+          Procesando...
+        } @else {
+          {{ confirmText }}
+        }
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+.dropdown-menu {
+  position: fixed;
+  background: white;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  overflow: hidden;
+  z-index: 9999;
+
+  ::ng-deep .dropdown-item {
+    background: none;
+    border: none;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #111827;
+    transition: background-color 0.2s;
+    width: 100%;
+
+    &:hover {
+      background-color: var(--border-color);
+    }
+  }
+}
