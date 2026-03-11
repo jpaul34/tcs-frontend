@@ -117,6 +117,17 @@ body {
   max-height: 100%;
   min-height: 600px;
   background-color: var(--bg-card);
-  // overflow: hidden;
   overflow-y: auto;
+}
+
+.error-banner {
+  color: var(--error-color);
+  background-color: var(--error-color-light);
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  text-align: left;
+  border: 1px solid var(--error-color-border);
+  animation: fadeIn 0.3s ease-in-out;
 }

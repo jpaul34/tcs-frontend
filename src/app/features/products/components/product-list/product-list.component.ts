@@ -137,7 +137,7 @@ export class ProductListComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error al eliminar:', err);
-          this.deleteError = 'El producto no pudo ser eliminado. Por favor, inténte más tarde.';
+          this.deleteError = 'El producto no pudo ser eliminado. Por favor, intente más tarde.';
           this.cdr.detectChanges();
         },
       });

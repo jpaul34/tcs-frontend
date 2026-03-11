@@ -55,18 +55,6 @@
   }
 }
 
-.error-banner {
-  color: var(--error-color);
-  background-color: var(--error-color-light);
-  padding: 0.75rem;
-  border-radius: 4px;
-  margin-top: 1.25rem;
-  font-size: 0.9rem;
-  text-align: left;
-  border: 1px solid var(--error-color-border);
-  animation: fadeIn 0.3s ease-in-out;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;

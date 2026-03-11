@@ -16,6 +16,10 @@ export class ProductService {
       .pipe(map((response) => response.data));
   }
 
+  getProductById(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+  }
+
   createProduct(product: Product): Observable<Product> {
     return this.http
       .post<ApiResponse<Product>>(this.apiUrl, product)
