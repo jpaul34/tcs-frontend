@@ -9,7 +9,7 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from '@features/products/services/product.service';
 import { catchError, map, Observable, of, switchMap, timer } from 'rxjs';
 
 export function dateMinTodayValidator(control: AbstractControl): ValidationErrors | null {

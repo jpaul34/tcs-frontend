@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
-import { Product, ApiResponse } from '../models/product.interface';
+import { Product, ApiResponse } from '@features/products/models/product.interface';
 
 @Injectable({
   providedIn: 'root',

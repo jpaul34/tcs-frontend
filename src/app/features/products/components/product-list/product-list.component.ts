@@ -4,11 +4,11 @@ import { RouterLink } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { combineLatest, finalize, map, Observable, startWith } from 'rxjs';
 
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../models/product.interface';
-import { SkeletonLoaderComponent } from '../../../../shared/components/skeleton-loader/skeleton-loader.component';
-import { ModalComponent } from '../../../../shared/components/modal/modal.component';
-import { DropdownComponent } from '../../../../shared/components/dropdown/dropdown.component';
+import { ProductService } from '@features/products/services/product.service';
+import { Product } from '@features/products/models/product.interface';
+import { SkeletonLoaderComponent } from '@shared/components/skeleton-loader/skeleton-loader.component';
+import { ModalComponent } from '@shared/components/modal/modal.component';
+import { DropdownComponent } from '@shared/components/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-product-list',
