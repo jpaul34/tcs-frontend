@@ -1,113 +1,119 @@
-<div class="card-layout form-container">
-  <button type="button" class="btn-return" routerLink="/products">
-    <span class="icon">🡨</span> Regresar
-  </button>
+<div class="view-wrapper">
+  <div class="form-container">
+    <button type="button" class="btn-return" routerLink="/products">
+      <span class="icon">🡨</span> Regresar
+    </button>
 
-  <div class="form-wrapper">
-    <h2 class="form-title">Formulario de Registro</h2>
-    <hr class="divider" />
+    <div class="form-wrapper">
+      <h2 class="form-title">Formulario de Registro</h2>
+      <hr class="divider" />
 
-    <form class="form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="id">ID</label>
-          <div class="">
-            <input
-              class="input-container"
-              type="text"
-              id="id"
-              formControlName="id"
-              [class.is-invalid]="productForm.get('id')?.invalid && productForm.get('id')?.touched"
-            />
+      <form class="form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="id">ID</label>
+            <div class="">
+              <input
+                class="input-container"
+                type="text"
+                id="id"
+                formControlName="id"
+                [class.is-invalid]="
+                  productForm.get('id')?.invalid && productForm.get('id')?.touched
+                "
+              />
 
-            @if (productForm.get('id')?.pending) {
-              <span class="loading-indicator">Comprobando...</span>
+              @if (productForm.get('id')?.pending) {
+                <span class="loading-indicator">Comprobando...</span>
+              }
+            </div>
+            @if (productForm.get('id')?.invalid && productForm.get('id')?.touched) {
+              <span class="error-msg">{{ getErrorMessage('id') }}</span>
             }
           </div>
-          @if (productForm.get('id')?.invalid && productForm.get('id')?.touched) {
-            <span class="error-msg">{{ getErrorMessage('id') }}</span>
-          }
-        </div>
 
-        <div class="form-group">
-          <label for="name">Nombre</label>
-          <input
-            type="text"
-            id="name"
-            formControlName="name"
-            [class.is-invalid]="
-              productForm.get('name')?.invalid && productForm.get('name')?.touched
-            "
-          />
-          @if (productForm.get('name')?.invalid && productForm.get('name')?.touched) {
-            <span class="error-msg">{{ getErrorMessage('name') }}</span>
-          }
-        </div>
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              [class.is-invalid]="
+                productForm.get('name')?.invalid && productForm.get('name')?.touched
+              "
+            />
+            @if (productForm.get('name')?.invalid && productForm.get('name')?.touched) {
+              <span class="error-msg">{{ getErrorMessage('name') }}</span>
+            }
+          </div>
 
-        <div class="form-group">
-          <label for="description">Descripción</label>
-          <input
-            type="text"
-            id="description"
-            formControlName="description"
-            [class.is-invalid]="
+          <div class="form-group">
+            <label for="description">Descripción</label>
+            <input
+              type="text"
+              id="description"
+              formControlName="description"
+              [class.is-invalid]="
+                productForm.get('description')?.invalid && productForm.get('description')?.touched
+              "
+            />
+            @if (
               productForm.get('description')?.invalid && productForm.get('description')?.touched
-            "
-          />
-          @if (productForm.get('description')?.invalid && productForm.get('description')?.touched) {
-            <span class="error-msg">{{ getErrorMessage('description') }}</span>
-          }
-        </div>
+            ) {
+              <span class="error-msg">{{ getErrorMessage('description') }}</span>
+            }
+          </div>
 
-        <div class="form-group">
-          <label for="logo">Logo</label>
-          <input
-            type="text"
-            id="logo"
-            formControlName="logo"
-            [class.is-invalid]="
-              productForm.get('logo')?.invalid && productForm.get('logo')?.touched
-            "
-          />
-          @if (productForm.get('logo')?.invalid && productForm.get('logo')?.touched) {
-            <span class="error-msg">{{ getErrorMessage('logo') }}</span>
-          }
-        </div>
+          <div class="form-group">
+            <label for="logo">Logo</label>
+            <input
+              type="text"
+              id="logo"
+              formControlName="logo"
+              [class.is-invalid]="
+                productForm.get('logo')?.invalid && productForm.get('logo')?.touched
+              "
+            />
+            @if (productForm.get('logo')?.invalid && productForm.get('logo')?.touched) {
+              <span class="error-msg">{{ getErrorMessage('logo') }}</span>
+            }
+          </div>
 
-        <div class="form-group">
-          <label for="date_release">Fecha Liberación</label>
-          <input
-            type="date"
-            id="date_release"
-            formControlName="date_release"
-            [min]="minDate"
-            [class.is-invalid]="
+          <div class="form-group">
+            <label for="date_release">Fecha Liberación</label>
+            <input
+              type="date"
+              id="date_release"
+              formControlName="date_release"
+              [min]="minDate"
+              [class.is-invalid]="
+                productForm.get('date_release')?.invalid && productForm.get('date_release')?.touched
+              "
+            />
+            @if (
               productForm.get('date_release')?.invalid && productForm.get('date_release')?.touched
-            "
-          />
-          @if (
-            productForm.get('date_release')?.invalid && productForm.get('date_release')?.touched
-          ) {
-            <span class="error-msg">{{ getErrorMessage('date_release') }}</span>
-          }
+            ) {
+              <span class="error-msg">{{ getErrorMessage('date_release') }}</span>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="date_revision">Fecha Revisión</label>
+            <input type="date" id="date_revision" formControlName="date_revision" />
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="date_revision">Fecha Revisión</label>
-          <input type="date" id="date_revision" formControlName="date_revision" />
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" (click)="onReset()">Reiniciar</button>
+          <button
+            type="submit"
+            class="btn-primary"
+            [disabled]="productForm.invalid || productForm.pending"
+          >
+            Enviar
+          </button>
         </div>
-      </div>
-
-      <div class="form-actions">
-        <button type="button" class="btn-secondary" (click)="onReset()">Reiniciar</button>
-        <button
-          type="submit"
-          class="btn-primary"
-          [disabled]="productForm.invalid || productForm.pending"
-        >
-          Enviar
-        </button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>

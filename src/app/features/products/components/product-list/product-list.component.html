@@ -1,111 +1,120 @@
-<div class="card-layout">
-  <div class="toolbar">
-    <input type="text" placeholder="Search..." class="search-input" [formControl]="searchControl" />
-    <button class="btn-primary" routerLink="/products/add">Agregar</button>
-  </div>
+<div class="view-wrapper">
+  <div class="view-container">
+    <div class="toolbar">
+      <input
+        type="text"
+        placeholder="Search..."
+        class="search-input"
+        [formControl]="searchControl"
+      />
+      <button class="btn-primary" routerLink="/products/add">Agregar</button>
+    </div>
 
-  <div class="table-wrapper">
-    <div class="table-container" (scroll)="onTableScroll()">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th><div class="th-header-content">Logo</div></th>
-            <th><div class="th-header-content">Nombre del producto</div></th>
-            <th>
-              <div class="th-header-content">
-                Descripción
-                <span class="info-icon" title="Información">i</span>
-              </div>
-            </th>
-            <th>
-              <div class="th-header-content">
-                Fecha de liberación
-                <span class="info-icon" title="Información">i</span>
-              </div>
-            </th>
-            <th>
-              <div class="th-header-content">
-                Fecha de reestructuración
-                <span class="info-icon" title="Información">i</span>
-              </div>
-            </th>
-            <th></th>
-          </tr>
-        </thead>
+    <div class="table-wrapper">
+      <div class="table-container" (scroll)="onTableScroll()">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th><div class="th-header-content">Logo</div></th>
+              <th><div class="th-header-content">Nombre del producto</div></th>
+              <th>
+                <div class="th-header-content">
+                  Descripción
+                  <span class="info-icon" title="Información">i</span>
+                </div>
+              </th>
+              <th>
+                <div class="th-header-content">
+                  Fecha de liberación
+                  <span class="info-icon" title="Información">i</span>
+                </div>
+              </th>
+              <th>
+                <div class="th-header-content">
+                  Fecha de reestructuración
+                  <span class="info-icon" title="Información">i</span>
+                </div>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
 
-        <tbody>
-          @if (filteredProducts$ | async; as products) {
-            @for (product of products; track product.id) {
-              <tr>
-                <td>
-                  <div class="logo-wrapper">
-                    <img
-                      [src]="product.logo"
-                      [alt]="product.name"
-                      class="product-logo"
-                      onerror="
-                        this.style.display = 'none';
-                        this.nextElementSibling.style.display = 'flex';
-                      "
-                    />
-                    <div class="fallback-logo" style="display: none">
-                      {{ product.name.charAt(0) | uppercase }}
+          <tbody>
+            @if (filteredProducts$ | async; as products) {
+              @for (product of products; track product.id) {
+                <tr>
+                  <td>
+                    <div class="logo-wrapper">
+                      <img
+                        [src]="product.logo"
+                        [alt]="product.name"
+                        class="product-logo"
+                        onerror="
+                          this.style.display = 'none';
+                          this.nextElementSibling.style.display = 'flex';
+                        "
+                      />
+                      <div class="fallback-logo" style="display: none">
+                        {{ product.name.charAt(0) | uppercase }}
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.date_release | date: 'dd/MM/yyyy' }}</td>
-                <td>{{ product.date_revision | date: 'dd/MM/yyyy' }}</td>
-                <td class="actions-cell">
-                  <div class="action-menu-container">
-                    <button class="icon-btn" (click)="toggleMenu(product.id, $event)">⋮</button>
+                  </td>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.description }}</td>
+                  <td>{{ product.date_release | date: 'dd/MM/yyyy' }}</td>
+                  <td>{{ product.date_revision | date: 'dd/MM/yyyy' }}</td>
+                  <td class="actions-cell">
+                    <div class="action-menu-container">
+                      <button class="icon-btn" (click)="toggleMenu(product.id, $event)">⋮</button>
 
-                    <app-dropdown [isOpen]="showMenuForId === product.id" [position]="menuPosition">
-                      <button class="dropdown-item" routerLink="/products/edit/{{ product.id }}">
-                        Editar
-                      </button>
-                      <button class="dropdown-item" (click)="openDeleteModal(product)">
-                        Eliminar
-                      </button>
-                    </app-dropdown>
-                  </div>
-                </td>
-              </tr>
-            } @empty {
+                      <app-dropdown
+                        [isOpen]="showMenuForId === product.id"
+                        [position]="menuPosition"
+                      >
+                        <button class="dropdown-item" routerLink="/products/edit/{{ product.id }}">
+                          Editar
+                        </button>
+                        <button class="dropdown-item" (click)="openDeleteModal(product)">
+                          Eliminar
+                        </button>
+                      </app-dropdown>
+                    </div>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="6" class="text-center">No hay productos registrados.</td>
+                </tr>
+              }
+            } @else {
               <tr>
-                <td colspan="6" class="text-center">No hay productos registrados.</td>
+                <td colspan="6">
+                  <app-skeleton-loader [rows]="5" height="50px"></app-skeleton-loader>
+                </td>
               </tr>
             }
-          } @else {
-            <tr>
-              <td colspan="6">
-                <app-skeleton-loader [rows]="5" height="50px"></app-skeleton-loader>
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="pagination-footer">
-      <span class="results-text">{{ resultsCount }} Resultados</span>
-      <select class="page-size-select" [formControl]="pageSizeControl">
-        <option [ngValue]="5">5</option>
-        <option [ngValue]="10">10</option>
-        <option [ngValue]="20">20</option>
-      </select>
+      <div class="pagination-footer">
+        <span class="results-text">{{ resultsCount }} Resultados</span>
+        <select class="page-size-select" [formControl]="pageSizeControl">
+          <option [ngValue]="5">5</option>
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="20">20</option>
+        </select>
+      </div>
     </div>
   </div>
+  @if (productToDelete) {
+    <app-modal
+      [message]="'¿Estás seguro de eliminar el producto ' + productToDelete.name + '?'"
+      [isProcessing]="isDeleting"
+      [errorMessage]="deleteError"
+      (confirmAction)="confirmDelete()"
+      (cancelAction)="closeModal()"
+    >
+    </app-modal>
+  }
 </div>
-
-@if (productToDelete) {
-  <app-modal
-    [message]="'¿Estás seguro de eliminar el producto ' + productToDelete.name + '?'"
-    [isProcessing]="isDeleting"
-    [errorMessage]="deleteError"
-    (confirmAction)="confirmDelete()"
-    (cancelAction)="closeModal()"
-  >
-  </app-modal>
-}

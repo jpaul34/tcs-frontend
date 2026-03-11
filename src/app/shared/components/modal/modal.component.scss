@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 8px;
   width: 90%;
   max-width: 450px;
@@ -23,7 +23,7 @@
     padding: 2.5rem;
     h3 {
       padding-bottom: 0.5rem;
-      color: var(--text-main);
+      color: var(--primary-text-color);
       font-size: 1.1rem;
       line-height: 1.5;
       font-weight: 500;
@@ -33,7 +33,7 @@
 
   .divider {
     border: 0;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--primary-border-color);
     margin-bottom: 1.5rem;
   }
 
@@ -57,13 +57,13 @@
 
 .error-banner {
   color: var(--error-color);
-  background-color: #fee2e2;
+  background-color: var(--error-color-light);
   padding: 0.75rem;
   border-radius: 4px;
   margin-top: 1.25rem;
   font-size: 0.9rem;
   text-align: left;
-  border: 1px solid #f87171;
+  border: 1px solid var(--error-color-border);
   animation: fadeIn 0.3s ease-in-out;
 }
 

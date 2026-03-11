@@ -1,7 +1,7 @@
 .dropdown-menu {
   position: fixed;
   background: white;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--secondary-border-color);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   z-index: 50;
@@ -18,12 +18,12 @@
     text-align: left;
     cursor: pointer;
     font-size: 0.9rem;
-    color: #111827;
+    color: var(--primary-text-color);
     transition: background-color 0.2s;
     width: 100%;
 
     &:hover {
-      background-color: var(--border-color);
+      background-color: var(--secondary-border-color);
     }
   }
 }

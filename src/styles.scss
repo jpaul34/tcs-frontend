@@ -1,45 +1,79 @@
 :root {
-  --primary-color: #fbd34d;
-  --primary-hover: #fcd34d;
-  --text-main: #1f2937;
-  --text-muted: #6b7280;
-  --bg-main: #f4f6f8;
-  --bg-card: #ffffff;
-  --bg-white: #ffffff;
+  --primary-color: #f5df66;
+  --primary-hover: #f0cf16;
+  --secondary-color: #eaecf2;
+  --secondary-hover: #d7dced;
+  --primary-text-color: #4f4f52;
+  --secondary-text-color: #12295e;
+  --black-text-color: #000000;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f6f9;
   --bg-gray: #c1c7d7;
-  --border-color: #e5e7eb;
+  --bg-gray-dark: #6e6e73;
+  --bg-gray-hover: #b6bfd8;
+  --primary-border-color: #dadadd;
+  --secondary-border-color: #ececec;
   --error-color: #ef4444;
-  --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --error-color-light: #fee2e2;
+  --error-color-border: #f87171;
+  --font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+  --font-family-title: Courier;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  &::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--bg-gray-dark);
+    border-radius: 10px;
+  }
 }
 
 body {
+  height: 100%;
+  width: 100vw;
   font-family: var(--font-family);
-  background-color: var(--bg-main);
-  color: var(--text-main);
+  background-color: var(--bg-secondary);
+  color: var(--primary-text-color);
   line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  max-height: 100%;
+  height: calc(100vh - 99px);
+  display: flex;
+  flex-direction: column;
+  min-height: 800px;
+  overflow-y: auto;
 }
 
 .btn-primary {
+  font-family: var(--font-family);
+  font-size: 0.8rem;
   background-color: var(--primary-color);
   border: none;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
+  padding: 1rem 2rem;
+  font-weight: 700;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  color: var(--text-main);
+  color: var(--secondary-text-color);
 
   &:hover {
     background-color: var(--primary-hover);
@@ -49,4 +83,40 @@ body {
     opacity: 0.6;
     cursor: not-allowed;
   }
+}
+
+.btn-secondary {
+  font-family: var(--font-family);
+  background-color: var(--bg-gray);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  color: var(--secondary-text-color);
+
+  &:hover {
+    background-color: var(--bg-gray-hover);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.view-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 99px);
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  max-height: 100%;
+  min-height: 600px;
+  background-color: var(--bg-card);
+  // overflow: hidden;
+  overflow-y: auto;
 }
