@@ -6,6 +6,10 @@ export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       let errorMessage = 'Ocurrió un error desconocido';
 
+      if (req.url.includes('/verification')) {
+        return throwError(() => error);
+      }
+
       if (error.error instanceof ErrorEvent) {
         errorMessage = `Error de cliente: ${error.error.message}`;
       } else {

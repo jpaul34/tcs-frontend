@@ -1,13 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { Product, ApiResponse } from '../models/product.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private readonly apiUrl = 'http://localhost:3002/bp/products';
+  private readonly apiUrl = '/bp/products';
   private readonly http = inject(HttpClient);
 
   getProducts(): Observable<Product[]> {
@@ -33,6 +33,9 @@ export class ProductService {
   }
 
   verifyProductId(id: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.apiUrl}/verification/${id}`);
+    return this.http.get<boolean>(`${this.apiUrl}/verification/${id}`).pipe(
+      map((res) => !!res),
+      catchError(() => of(false)),
+    );
   }
 }
