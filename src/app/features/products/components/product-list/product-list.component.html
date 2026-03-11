@@ -5,7 +5,7 @@
   </div>
 
   <div class="table-wrapper">
-    <div class="table-container">
+    <div class="table-container" (scroll)="onTableScroll()">
       <table class="data-table">
         <thead>
           <tr>
@@ -58,7 +58,18 @@
                 <td>{{ product.date_release | date: 'dd/MM/yyyy' }}</td>
                 <td>{{ product.date_revision | date: 'dd/MM/yyyy' }}</td>
                 <td class="actions-cell">
-                  <button class="icon-btn">⋮</button>
+                  <div class="action-menu-container">
+                    <button class="icon-btn" (click)="toggleMenu(product.id, $event)">⋮</button>
+
+                    <app-dropdown [isOpen]="showMenuForId === product.id" [position]="menuPosition">
+                      <button class="dropdown-item" routerLink="/products/edit/{{ product.id }}">
+                        Editar
+                      </button>
+                      <button class="dropdown-item" (click)="openDeleteModal(product)">
+                        Eliminar
+                      </button>
+                    </app-dropdown>
+                  </div>
                 </td>
               </tr>
             } @empty {
@@ -87,3 +98,14 @@
     </div>
   </div>
 </div>
+
+@if (productToDelete) {
+  <app-modal
+    [message]="'¿Estás seguro de eliminar el producto ' + productToDelete.name + '?'"
+    [isProcessing]="isDeleting"
+    [errorMessage]="deleteError"
+    (confirmAction)="confirmDelete()"
+    (cancelAction)="closeModal()"
+  >
+  </app-modal>
+}

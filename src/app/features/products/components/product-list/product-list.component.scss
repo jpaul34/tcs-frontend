@@ -135,7 +135,15 @@
 }
 
 .actions-cell {
+  position: relative;
   text-align: center;
+}
+
+.action-menu-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .icon-btn {
