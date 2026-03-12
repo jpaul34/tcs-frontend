@@ -63,8 +63,10 @@ export class ProductListComponent implements OnInit {
           );
         }
 
-        this.resultsCount = filtered.length;
-        return filtered.slice(0, Number(pageSize));
+        const paginatedProducts = filtered.slice(0, Number(pageSize));
+        this.resultsCount = paginatedProducts.length;
+
+        return paginatedProducts;
       }),
     );
   }
